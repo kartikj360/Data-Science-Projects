@@ -1,5 +1,21 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[62]:
+
+
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
 import pandas as pd
 import matplotlib.pyplot as plt
+pd.options.mode.chained_assignment = None
+
+
+# In[ ]:
+
+
+
 
 
 # In[1]:
@@ -70,8 +86,92 @@ df_drop1
 df_drop1.shape
 
 
-# In[ ]:
+# In[52]:
 
 
+df_drop1['TotalCharges']
 
+
+# In[64]:
+
+
+df_drop1.TotalCharges=pd.to_numeric(df_drop1['TotalCharges'])
+
+
+# In[68]:
+
+
+df_drop1['TotalCharges'].dtype
+
+
+# In[73]:
+
+
+for x in df:
+    print(df[x].unique())
+
+
+# In[90]:
+
+
+def print_unique_dtype(df,y):
+    for x in df:
+        if df[x].dtype==y:
+            print(f'{x}:{df[x].unique()}')
+
+
+# In[84]:
+
+
+print_unique_dtype(df_drop1,'object')
+
+
+# In[93]:
+
+
+print_unique_dtype(df_drop1,'float64')
+
+
+# In[103]:
+
+
+df2=pd.get_dummies(data=df,columns=['Contract'])
+
+
+# In[105]:
+
+
+df2
+
+
+# In[109]:
+
+
+x=df.drop('Churn',axis='columns')
+y=df['Churn']
+
+
+# In[112]:
+
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=69)
+
+
+# In[114]:
+
+
+x_train.shape
+
+
+# In[115]:
+
+
+y_test.value_counts()
+
+
+# In[116]:
+
+
+y_pread=ANN(x_train,y_train,x_test,y_test,'binary_crossestropy'-1)
 
