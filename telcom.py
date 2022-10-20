@@ -170,8 +170,14 @@ x_train.shape
 y_test.value_counts()
 
 
-# In[116]:
+# In[3]:
 
 
-y_pread=ANN(x_train,y_train,x_test,y_test,'binary_crossestropy'-1)
+model=ANN(x_train,y_train,x_test,y_test,'binary_crossestropy'-1)
+
+
+# In[2]:
+
+
+
 
